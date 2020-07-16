@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>com.rain.I18nTool</id>
+    <name>i18nTranslateTool</name>
+    <vendor email="rain_jiang@outlook.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <groupId>com.alibaba</groupId>
+    <artifactId>fastjson</artifactId>
+    <version>1.2.58</version> <groupId>com.alibaba</groupId>
+    <artifactId>fastjson</artifactId>
+    <version>1.2.58</version>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <configurationType implementation="org.jetbrains.sdk.runConfiguration.DemoRunConfigurationType"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="I18nTool.TranslateAction" class="TranslateAction" text="Translate"
+                description="translate for selected word">
+            <add-to-group group-id="EditMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift T"/>
+        </action>
+    </actions>
+</idea-plugin>

@@ -1,13 +1,14 @@
 <idea-plugin>
     <id>com.rain.I18nTool</id>
     <name>i18nTranslateTool</name>
-    <vendor email="rain_jiang@outlook.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <version>1.1</version>
+    <vendor email="rain_jiang@outlook.com" url="https://github.com/RAIN-JIANGRAN/I18nTool">Github</vendor>
 
-    <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-    ]]></description>
-
+    <description>An i18n Tool for translate selected words,and replace it with a key ,which is stored in your local json file</description>
+    <change-notes>
+        1.support replace the selected words;
+        2.using google translate api;
+    </change-notes>
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
@@ -19,7 +20,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <configurationType implementation="org.jetbrains.sdk.runConfiguration.DemoRunConfigurationType"/>
+<!--        <configurationType implementation="org.jetbrains.sdk.runConfiguration.DemoRunConfigurationType"/>-->
     </extensions>
 
     <actions>

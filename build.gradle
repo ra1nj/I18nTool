@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.rain'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -21,6 +21,6 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      1.support replace the selected words;
+        2.using google translate api;"""
 }

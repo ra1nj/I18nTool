@@ -4,7 +4,13 @@
     <version>1.1</version>
     <vendor email="rain_jiang@outlook.com" url="https://github.com/RAIN-JIANGRAN/I18nTool">Github</vendor>
 
-    <description>An i18n Tool for translate selected words,and replace it with a key ,which is stored in your local json file</description>
+    <description>
+        An i18n tool which do the tiring job for you !
+        Just select the content you need to translate,
+        then press shift+T,the plugin will automatically translate it,
+        and put the translated content in json files which is located in your project directory,
+        finally , the plugin will replace the text you selected with a specific replacement.
+    </description>
     <change-notes>
         1.support replace the selected words;
         2.using google translate api;

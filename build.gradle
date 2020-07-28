@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.rain'
-version '1.0'
+version '1.1'
 
 repositories {
     mavenCentral()
@@ -21,6 +21,11 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      1.support replace the selected words;
-        2.using google translate api;"""
+    - 1.1
+      support with settings;  
+      change hot key to control+T/command+T  
+    - 1.0
+      support replace the selected words;
+      using google translate api; 
+"""
 }

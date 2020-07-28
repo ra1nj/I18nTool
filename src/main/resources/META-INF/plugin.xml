@@ -38,7 +38,7 @@
         <action id="I18nTool.TranslateAction" class="TranslateAction" text="Translate"
                 description="translate for selected word">
             <add-to-group group-id="EditMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift T"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl T"/>
         </action>
     </actions>
 </idea-plugin>

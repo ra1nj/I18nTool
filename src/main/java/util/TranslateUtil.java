@@ -1,9 +1,7 @@
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+package util;
 
+import com.alibaba.fastjson.JSONArray;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 public class TranslateUtil  {
     public String toEnglish(String content) throws IOException{

@@ -27,6 +27,10 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
 <!--        <configurationType implementation="org.jetbrains.sdk.runConfiguration.DemoRunConfigurationType"/>-->
+        <applicationService serviceImplementation="appSetting.AppSettingsState"/>
+        <applicationConfigurable parentId="tools" instance="appSetting.AppSettingsConfigurable"
+                                 id="appSetting.AppSettingsConfigurable"
+                                 displayName="i18n Settings"/>
     </extensions>
 
     <actions>

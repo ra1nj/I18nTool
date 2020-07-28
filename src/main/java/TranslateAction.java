@@ -1,3 +1,4 @@
+import appSetting.AppSettingsState;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -9,6 +10,8 @@ import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import org.apache.http.util.TextUtils;
+import util.JSONUtil;
+import util.TranslateUtil;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -23,42 +26,46 @@ public class TranslateAction extends AnAction {
             return;
         }
         SelectionModel model = mEditor.getSelectionModel();
-        final String selectedText = model.getSelectedText().replace("\'","").replace("\"","");
+        final String selectedText = model.getSelectedText().replace("\'", "").replace("\"", "");
         if (TextUtils.isEmpty(selectedText)) {
             return;
-        }else{
-            final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
+        } else {
             final Document document = mEditor.getDocument();
-            String rootFilePath = project.getBasePath();
-            String zhFilePath = rootFilePath + "/languages/zh.json";
-            String enFilePath = rootFilePath + "/languages/en.json";
-            String koFilePath = rootFilePath + "/languages/ko.json";
-            String viFilePath = rootFilePath + "/languages/vi.json";
-            String key = JSONUtil.findKeyInJSONFile(zhFilePath,selectedText);
-            if(key != null){
+            final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
+            AppSettingsState settings = AppSettingsState.getInstance();
+            if (settings.fileDirectory == null || settings.fileDirectory == "") {
+                settings.fileDirectory = project.getBasePath() + "/languages/";
+            }
+
+            String zhFilePath = settings.fileDirectory + "zh.json";
+            String enFilePath = settings.fileDirectory + "en.json";
+            String koFilePath = settings.fileDirectory + "ko.json";
+            String viFilePath = settings.fileDirectory + "vi.json";
+            String key = JSONUtil.findKeyInJSONFile(zhFilePath, selectedText);
+            if (key != null) {
                 int start = model.getSelectionStart();
                 int end = model.getSelectionEnd();
                 WriteCommandAction.runWriteCommandAction(project, () ->
-                        document.replaceString(start, end, String.format("i18nConfigGlobal.t('%s')",key))
+                        document.replaceString(start, end, String.format(settings.replacementText, key))
                 );
                 model.removeSelection();
-            }else{
+            } else {
                 try {
                     TranslateUtil translateUtil = new TranslateUtil();
                     String enRes = translateUtil.toEnglish(selectedText);
                     String koRes = translateUtil.toKoren(selectedText);
                     String viRes = translateUtil.toVietnamese(selectedText);
-                    JSONUtil.writeInJSONFile(zhFilePath,selectedText,selectedText);
-                    JSONUtil.writeInJSONFile(koFilePath,selectedText,koRes);
-                    JSONUtil.writeInJSONFile(enFilePath,selectedText,enRes);
-                    JSONUtil.writeInJSONFile(viFilePath,selectedText,viRes);
+                    JSONUtil.writeInJSONFile(zhFilePath, selectedText, selectedText);
+                    JSONUtil.writeInJSONFile(koFilePath, selectedText, koRes);
+                    JSONUtil.writeInJSONFile(enFilePath, selectedText, enRes);
+                    JSONUtil.writeInJSONFile(viFilePath, selectedText, viRes);
                     int start = model.getSelectionStart();
                     int end = model.getSelectionEnd();
                     WriteCommandAction.runWriteCommandAction(project, () ->
-                            document.replaceString(start, end, String.format("i18nConfigGlobal.t('%s')",selectedText))
+                            document.replaceString(start, end, String.format(settings.replacementText, selectedText))
                     );
                     model.removeSelection();
-                }catch (IOException ioException){
+                } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
             }

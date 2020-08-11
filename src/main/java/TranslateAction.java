@@ -34,13 +34,13 @@ public class TranslateAction extends AnAction {
             final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
             AppSettingsState settings = AppSettingsState.getInstance();
             if (settings.fileDirectory == null || settings.fileDirectory == "") {
-                settings.fileDirectory = project.getBasePath() + "/languages/";
+                settings.fileDirectory = project.getBasePath() + "/languages";
             }
 
-            String zhFilePath = settings.fileDirectory + "zh.json";
-            String enFilePath = settings.fileDirectory + "en.json";
-            String koFilePath = settings.fileDirectory + "ko.json";
-            String viFilePath = settings.fileDirectory + "vi.json";
+            String zhFilePath = settings.fileDirectory + "/zh.json";
+            String enFilePath = settings.fileDirectory + "/en.json";
+            String koFilePath = settings.fileDirectory + "/ko.json";
+            String viFilePath = settings.fileDirectory + "/vi.json";
             String key = JSONUtil.findKeyInJSONFile(zhFilePath, selectedText);
             if (key != null) {
                 int start = model.getSelectionStart();

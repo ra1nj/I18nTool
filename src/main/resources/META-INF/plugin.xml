@@ -7,7 +7,7 @@
     <description>
         An i18n tool which do the tiring job for you !
         Just select the content you need to translate,
-        then press shift+T,the plugin will automatically translate it,
+        then press meta+shift+T,the plugin will automatically translate it,
         and put the translated content in json files which is located in your project directory,
         finally , the plugin will replace the text you selected with a specific replacement.
     </description>
@@ -38,7 +38,7 @@
         <action id="I18nTool.TranslateAction" class="TranslateAction" text="Translate"
                 description="translate for selected word">
             <add-to-group group-id="EditMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl T"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="meta shift T"/>
         </action>
     </actions>
 </idea-plugin>

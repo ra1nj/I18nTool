@@ -14,6 +14,7 @@ import com.intellij.util.ui.FormBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * Supports creating and managing a JPanel for the Settings Dialog.
@@ -22,7 +23,7 @@ public class AppSettingsComponent {
     private final JPanel myMainPanel;
     private final JBTextField myReplacementText = new JBTextField();
     private final TextFieldWithBrowseButton myDirectoryPath = new TextFieldWithBrowseButton();
-    private final JBList myLanguageList = new JBList();
+    private final LanguageSettingListComponent myLanguageList = new LanguageSettingListComponent();
 
 
     private void setFilePathComponent() {
@@ -30,17 +31,18 @@ public class AppSettingsComponent {
         myDirectoryPath.addBrowseFolderListener(listener);
     }
 
-    private void setLanguageListComponent() {
-        myLanguageList.setModel(JBList.createDefaultListModel(Language.langMap));
-    }
+//    private void setLanguageListComponent() {
+//        myLanguageList.setModel(JBList.createDefaultListModel(Language.langMap));
+//    }
 
 
     public AppSettingsComponent() {
-        setLanguageListComponent();
+//        setLanguageListComponent();
         setFilePathComponent();
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("Enter the directory path you want to store,if the path doesn't exist ,we will create one for you: "), myDirectoryPath, 1, true)
                 .addLabeledComponent(new JBLabel("You can change the default replacement format for your own: "), myReplacementText, 1, true)
+                .addComponent(myLanguageList.getPanel())
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
@@ -59,7 +61,7 @@ public class AppSettingsComponent {
         return myDirectoryPath.getText();
     }
 
-    public void setDirectoryPath(@NotNull String newText) {
+    public void setDirectoryPath(String newText) {
         myDirectoryPath.setText(newText);
     }
 
@@ -73,5 +75,19 @@ public class AppSettingsComponent {
         myReplacementText.setText(newText);
     }
 
+    public List<String> getTargetLanguages() {
+        return myLanguageList.getSelectedTargetLangCodes();
+    }
 
+    public void setTargetLanguages(List<String> langList){
+        myLanguageList.setSelectedTargetCodes(langList);
+    }
+
+    public String getSourceLanguage() {
+        return myLanguageList.getSelectedSourceLangCode();
+    }
+
+    public void setSourceLanguage(String lang){
+        myLanguageList.setSelectedSourceCode(lang);
+    }
 }

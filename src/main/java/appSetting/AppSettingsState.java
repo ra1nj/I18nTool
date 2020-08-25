@@ -10,6 +10,10 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Supports storing the application settings in a persistent way.
  * The State and Storage annotations define the name of the data and the file name where
@@ -23,7 +27,8 @@ public class AppSettingsState implements PersistentStateComponent<AppSettingsSta
 
     public String replacementText = "i18nConfigGlobal.t('%s')";
     public String fileDirectory = null;
-
+    public List<String> targetLanguages = new ArrayList<String>(Arrays.asList("en","ko","vi"));
+    public String sourceLanguage = "zh-cn";
 
     public static AppSettingsState getInstance() {
         return ServiceManager.getService(AppSettingsState.class);

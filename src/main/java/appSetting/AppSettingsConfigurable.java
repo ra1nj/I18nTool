@@ -41,6 +41,8 @@ public class AppSettingsConfigurable implements Configurable {
         AppSettingsState settings = AppSettingsState.getInstance();
         boolean modified = !mySettingsComponent.getReplacementText().equals(settings.replacementText);
         modified |= !mySettingsComponent.getDirectoryPath().equals(settings.fileDirectory);
+        modified |= !mySettingsComponent.getTargetLanguages().equals(settings.targetLanguages);
+        modified |= !mySettingsComponent.getSourceLanguage().equals(settings.sourceLanguage);
         return modified;
     }
 
@@ -49,6 +51,8 @@ public class AppSettingsConfigurable implements Configurable {
         AppSettingsState settings = AppSettingsState.getInstance();
         settings.replacementText = mySettingsComponent.getReplacementText();
         settings.fileDirectory = mySettingsComponent.getDirectoryPath();
+        settings.targetLanguages = mySettingsComponent.getTargetLanguages();
+        settings.sourceLanguage = mySettingsComponent.getSourceLanguage();
     }
 
     @Override
@@ -56,6 +60,8 @@ public class AppSettingsConfigurable implements Configurable {
         AppSettingsState settings = AppSettingsState.getInstance();
         mySettingsComponent.setReplacementText(settings.replacementText);
         mySettingsComponent.setDirectoryPath(settings.fileDirectory);
+        mySettingsComponent.setTargetLanguages(settings.targetLanguages);
+        mySettingsComponent.setSourceLanguage(settings.sourceLanguage);
     }
 
     @Override

@@ -15,6 +15,8 @@ import util.TranslateUtil;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TranslateAction extends AnAction {
 
@@ -36,12 +38,8 @@ public class TranslateAction extends AnAction {
             if (settings.fileDirectory == null || settings.fileDirectory == "") {
                 settings.fileDirectory = project.getBasePath() + "/languages";
             }
-
-            String zhFilePath = settings.fileDirectory + "/zh.json";
-            String enFilePath = settings.fileDirectory + "/en.json";
-            String koFilePath = settings.fileDirectory + "/ko.json";
-            String viFilePath = settings.fileDirectory + "/vi.json";
-            String key = JSONUtil.findKeyInJSONFile(zhFilePath, selectedText);
+            String sourceFilePath = settings.fileDirectory + "/"+settings.sourceLanguage+".json";
+            String key = JSONUtil.findKeyInJSONFile(sourceFilePath, selectedText);
             if (key != null) {
                 int start = model.getSelectionStart();
                 int end = model.getSelectionEnd();
@@ -51,14 +49,14 @@ public class TranslateAction extends AnAction {
                 model.removeSelection();
             } else {
                 try {
+                    JSONUtil.writeInJSONFile(sourceFilePath, selectedText, selectedText);
                     TranslateUtil translateUtil = new TranslateUtil();
-                    String enRes = translateUtil.toEnglish(selectedText);
-                    String koRes = translateUtil.toKoren(selectedText);
-                    String viRes = translateUtil.toVietnamese(selectedText);
-                    JSONUtil.writeInJSONFile(zhFilePath, selectedText, selectedText);
-                    JSONUtil.writeInJSONFile(koFilePath, selectedText, koRes);
-                    JSONUtil.writeInJSONFile(enFilePath, selectedText, enRes);
-                    JSONUtil.writeInJSONFile(viFilePath, selectedText, viRes);
+                    for(int i=0;i<settings.targetLanguages.size();i++){
+                        String langCode = settings.targetLanguages.get(i);
+                        String targetFilePath = settings.fileDirectory + "/"+langCode+".json";
+                        String transRes = translateUtil.translate(selectedText,langCode);
+                        JSONUtil.writeInJSONFile(targetFilePath, selectedText, transRes);
+                    }
                     int start = model.getSelectionStart();
                     int end = model.getSelectionEnd();
                     WriteCommandAction.runWriteCommandAction(project, () ->

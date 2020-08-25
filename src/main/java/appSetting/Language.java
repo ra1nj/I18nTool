@@ -21,7 +21,7 @@ public class Language {
     public Language(){
         Map<String,Object> langMap = JSONObject.parseObject(langJSON, Feature.OrderedField).getInnerMap();
         for (Map.Entry<String , Object> entry : langMap.entrySet()) {
-            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue().toString());
+//            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue().toString());
             this.langList.add(new LanguageVO(entry.getKey(),entry.getValue().toString()));
         }
     }

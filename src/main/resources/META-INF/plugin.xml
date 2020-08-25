@@ -2,7 +2,7 @@
     <id>com.rain.I18nTool</id>
     <name>i18nTranslateTool</name>
     <version>1.1</version>
-    <vendor email="rain_jiang@outlook.com" url="https://github.com/RAIN-JIANGRAN/I18nTool">Github</vendor>
+    <vendor email="rain_jiang@outlook.com" url="https://github.com/RAIN-JIANGRAN/I18nTool">Rain</vendor>
 
     <description>
         An i18n tool which do the tiring job for you !
@@ -28,7 +28,7 @@
         <!-- Add your extensions here -->
 <!--        <configurationType implementation="org.jetbrains.sdk.runConfiguration.DemoRunConfigurationType"/>-->
         <applicationService serviceImplementation="appSetting.AppSettingsState"/>
-        <applicationConfigurable parentId="tools" instance="appSetting.AppSettingsConfigurable"
+        <projectConfigurable parentId="tools" instance="appSetting.AppSettingsConfigurable"
                                  id="appSetting.AppSettingsConfigurable"
                                  displayName="i18n Settings"/>
     </extensions>
